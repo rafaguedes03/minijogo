@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/obstacles/hanging_wire.gd" id="1_wire"]
+[ext_resource type="Texture2D" path="res://art/obstacles/hanging_wire_0.png" id="2_f0"]
+[ext_resource type="Texture2D" path="res://art/obstacles/hanging_wire_1.png" id="3_f1"]
+[ext_resource type="Texture2D" path="res://art/obstacles/hanging_wire_2.png" id="4_f2"]
+[ext_resource type="Texture2D" path="res://art/obstacles/hanging_wire_3.png" id="5_f3"]
+[ext_resource type="AudioStream" path="res://audio/sfx/Audio/zap1.ogg" id="6_zap"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wire"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_f1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f2")
+}, {
+"duration": 2.0,
+"texture": ExtResource("2_f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f1")
+}, {
+"duration": 3.0,
+"texture": ExtResource("2_f0")
+}],
+"loop": true,
+"name": &"spark",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wire"]
+size = Vector2(12, 340)
+
+[node name="HangingWire" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_wire")
+
+[node name="Visual" type="Node2D" parent="."]
+position = Vector2(0, -140)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual"]
+position = Vector2(-16, 0)
+sprite_frames = SubResource("SpriteFrames_wire")
+animation = &"spark"
+centered = false
+
+[node name="Sparks" type="CPUParticles2D" parent="Visual"]
+position = Vector2(0, 342)
+amount = 10
+lifetime = 0.45
+explosiveness = 0.2
+direction = Vector2(0, 1)
+spread = 75.0
+gravity = Vector2(0, 450)
+initial_velocity_min = 30.0
+initial_velocity_max = 85.0
+scale_amount_min = 1.0
+scale_amount_max = 2.0
+color = Color(1, 0.88, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 30)
+shape = SubResource("RectangleShape2D_wire")
+
+[node name="ZapSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_zap")

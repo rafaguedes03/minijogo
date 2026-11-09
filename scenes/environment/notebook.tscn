@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/environment/notebook.gd" id="1_nb"]
+[ext_resource type="Texture2D" path="res://art/obstacles/goal_pc.png" id="2_tx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
+size = Vector2(90, 1200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(30, 1200)
+
+[node name="Notebook" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_nb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -500)
+shape = SubResource("RectangleShape2D_trigger")
+
+[node name="EndWall" type="StaticBody2D" parent="."]
+position = Vector2(40, -500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndWall"]
+shape = SubResource("RectangleShape2D_wall")

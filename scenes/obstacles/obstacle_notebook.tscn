@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/obstacles/obstacle_notebook.gd" id="1_nb_obs"]
+[ext_resource type="Texture2D" path="res://art/obstacles/notebook_intact.png" id="2_intact"]
+[ext_resource type="Texture2D" path="res://art/obstacles/notebook_cracking.png" id="3_cracking"]
+[ext_resource type="Texture2D" path="res://art/obstacles/notebook_cracked.png" id="4_cracked"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cracking")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cracked")
+}],
+"loop": false,
+"name": &"crack",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_intact")
+}],
+"loop": false,
+"name": &"intact",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nb"]
+size = Vector2(50, 26)
+
+[node name="ObstacleNotebook" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_nb_obs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nb")
+animation = &"intact"
+autoplay = "intact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_nb")

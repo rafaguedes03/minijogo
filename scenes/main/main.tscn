@@ -1,0 +1,182 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_abcde"]
+[ext_resource type="Texture2D" path="res://art/environment/lab_floor_tile_128.png" id="2_floor"]
+[ext_resource type="PackedScene" path="res://scenes/environment/air_conditioner.tscn" id="4_ac"]
+[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://scenes/environment/collectible_time.tscn" id="6_col"]
+[ext_resource type="PackedScene" path="res://scenes/environment/notebook.tscn" id="7_nb"]
+[ext_resource type="Texture2D" path="res://art/environment/display_lab_background_clean.png" id="8_bg"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/water_cooler.tscn" id="9_wc"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/tangled_wires.tscn" id="10_wires"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/a4_papers.tscn" id="11_papers"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/pencils.tscn" id="12_pencils"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/obstacle_notebook.tscn" id="13_obs_nb"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/cleaner.tscn" id="14_cleaner"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/hanging_wire.tscn" id="15_wire"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(30000, 128)
+
+[node name="Main" type="Node2D"]
+
+[node name="HUD" parent="." instance=ExtResource("5_hud")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.4)
+motion_mirroring = Vector2(688, 0)
+
+[node name="BackgroundSprite" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 2
+position = Vector2(0, -110)
+scale = Vector2(0.5, 0.58)
+texture = ExtResource("8_bg")
+centered = false
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(15000, 300)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+texture_repeat = 2
+position = Vector2(-15000, -64)
+texture = ExtResource("2_floor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 30000, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_abcde")]
+position = Vector2(100, 200)
+
+[node name="A4Papers1" parent="." instance=ExtResource("11_papers")]
+position = Vector2(500, 224)
+
+[node name="DisplayPoints1" parent="." instance=ExtResource("6_col")]
+position = Vector2(700, 145)
+
+[node name="Pencils1" parent="." instance=ExtResource("12_pencils")]
+position = Vector2(900, 225)
+
+[node name="TangledWires1" parent="." instance=ExtResource("10_wires")]
+position = Vector2(1300, 218)
+
+[node name="WaterCooler1" parent="." instance=ExtResource("9_wc")]
+position = Vector2(1750, 194)
+
+[node name="DisplayPoints2" parent="." instance=ExtResource("6_col")]
+position = Vector2(1950, 145)
+
+[node name="AirConditioner1" parent="." instance=ExtResource("4_ac")]
+position = Vector2(2200, 20)
+
+[node name="ObstacleNotebook1" parent="." instance=ExtResource("13_obs_nb")]
+position = Vector2(2300, 216)
+
+[node name="Cleaner1" parent="." instance=ExtResource("14_cleaner")]
+position = Vector2(2800, 202)
+
+[node name="DisplayPoints3" parent="." instance=ExtResource("6_col")]
+position = Vector2(3100, 145)
+
+[node name="A4Papers2" parent="." instance=ExtResource("11_papers")]
+position = Vector2(3350, 224)
+
+[node name="TangledWires2" parent="." instance=ExtResource("10_wires")]
+position = Vector2(3800, 218)
+
+[node name="Pencils2" parent="." instance=ExtResource("12_pencils")]
+position = Vector2(4250, 225)
+
+[node name="DisplayPoints4" parent="." instance=ExtResource("6_col")]
+position = Vector2(4500, 145)
+
+[node name="WaterCooler2" parent="." instance=ExtResource("9_wc")]
+position = Vector2(4700, 194)
+
+[node name="AirConditioner2" parent="." instance=ExtResource("4_ac")]
+position = Vector2(5100, 20)
+
+[node name="ObstacleNotebook2" parent="." instance=ExtResource("13_obs_nb")]
+position = Vector2(5200, 216)
+
+[node name="Cleaner2" parent="." instance=ExtResource("14_cleaner")]
+position = Vector2(5750, 202)
+
+[node name="DisplayPoints5" parent="." instance=ExtResource("6_col")]
+position = Vector2(6050, 145)
+
+[node name="TangledWires3" parent="." instance=ExtResource("10_wires")]
+position = Vector2(6300, 218)
+
+[node name="A4Papers3" parent="." instance=ExtResource("11_papers")]
+position = Vector2(6750, 224)
+
+[node name="Pencils3" parent="." instance=ExtResource("12_pencils")]
+position = Vector2(7200, 225)
+
+[node name="DisplayPoints6" parent="." instance=ExtResource("6_col")]
+position = Vector2(7450, 145)
+
+[node name="WaterCooler3" parent="." instance=ExtResource("9_wc")]
+position = Vector2(7650, 194)
+
+[node name="AirConditioner3" parent="." instance=ExtResource("4_ac")]
+position = Vector2(8000, 20)
+
+[node name="ObstacleNotebook3" parent="." instance=ExtResource("13_obs_nb")]
+position = Vector2(8150, 216)
+
+[node name="Cleaner3" parent="." instance=ExtResource("14_cleaner")]
+position = Vector2(8700, 202)
+
+[node name="DisplayPoints7" parent="." instance=ExtResource("6_col")]
+position = Vector2(9000, 145)
+
+[node name="TangledWires4" parent="." instance=ExtResource("10_wires")]
+position = Vector2(9300, 218)
+
+[node name="A4Papers4" parent="." instance=ExtResource("11_papers")]
+position = Vector2(9750, 224)
+
+[node name="WaterCooler4" parent="." instance=ExtResource("9_wc")]
+position = Vector2(10200, 194)
+
+[node name="AirConditioner4" parent="." instance=ExtResource("4_ac")]
+position = Vector2(10550, 20)
+
+[node name="Pencils4" parent="." instance=ExtResource("12_pencils")]
+position = Vector2(10650, 225)
+
+[node name="DisplayPoints8" parent="." instance=ExtResource("6_col")]
+position = Vector2(10900, 145)
+
+[node name="ObstacleNotebook4" parent="." instance=ExtResource("13_obs_nb")]
+position = Vector2(11100, 216)
+
+[node name="Cleaner4" parent="." instance=ExtResource("14_cleaner")]
+position = Vector2(11550, 202)
+
+[node name="HangingWire1" parent="." instance=ExtResource("15_wire")]
+position = Vector2(1530, 0)
+
+[node name="HangingWire2" parent="." instance=ExtResource("15_wire")]
+position = Vector2(4020, 0)
+
+[node name="HangingWire3" parent="." instance=ExtResource("15_wire")]
+position = Vector2(6525, 0)
+
+[node name="HangingWire4" parent="." instance=ExtResource("15_wire")]
+position = Vector2(8425, 0)
+
+[node name="HangingWire5" parent="." instance=ExtResource("15_wire")]
+position = Vector2(9525, 0)
+
+[node name="HangingWire6" parent="." instance=ExtResource("15_wire")]
+position = Vector2(11325, 0)
+
+[node name="Notebook" parent="." instance=ExtResource("7_nb")]
+position = Vector2(12000, 202)

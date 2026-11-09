@@ -1,0 +1,205 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scenes/cutscene/intro_cutscene.gd" id="1_cutscene"]
+[ext_resource type="Texture2D" path="res://art/environment/display_lab_background_clean.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://art/environment/lab_floor_tile_128.png" id="3_floor"]
+[ext_resource type="Texture2D" path="res://art/cutscene/alarm_siren.png" id="4_siren"]
+[ext_resource type="Texture2D" path="res://art/cutscene/lab_desk.png" id="5_desk"]
+[ext_resource type="Texture2D" path="res://art/cutscene/screen_working.png" id="6_screen"]
+[ext_resource type="Texture2D" path="res://art/cutscene/keyboard.png" id="7_kb"]
+[ext_resource type="Texture2D" path="res://art/cutscene/coffee_mug_up.png" id="8_mug"]
+[ext_resource type="Texture2D" path="res://art/cutscene/explosion_puff.png" id="9_smoke"]
+[ext_resource type="Texture2D" path="res://art/player/hero/player_stand.png" id="10_player"]
+[ext_resource type="AudioStream" path="res://audio/sfx/Audio/footstep_wood_000.ogg" id="11_typ"]
+[ext_resource type="AudioStream" path="res://audio/sfx/Audio/impactGlass_light_000.ogg" id="12_cup"]
+[ext_resource type="AudioStream" path="res://audio/sfx/Audio/zapTwoTone.ogg" id="13_zap"]
+[ext_resource type="AudioStream" path="res://audio/sfx/Audio/impactMetal_heavy_000.ogg" id="14_boom"]
+[ext_resource type="AudioStream" path="res://audio/sfx/Audio/twoTone1.ogg" id="15_alr"]
+[ext_resource type="AudioStream" path="res://audio/sfx/Audio/phaseJump1.ogg" id="16_run"]
+
+[node name="IntroCutscene" type="Node2D"]
+script = ExtResource("1_cutscene")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 2
+position = Vector2(0, -12)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_bg")
+centered = false
+
+[node name="Floor" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(0, 275)
+texture = ExtResource("3_floor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 128)
+
+[node name="SirenSprite" type="Sprite2D" parent="."]
+position = Vector2(320, 12)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_siren")
+
+[node name="DeskSprite" type="Sprite2D" parent="."]
+position = Vector2(370, 240)
+texture = ExtResource("5_desk")
+
+[node name="MonitorSprite" type="Sprite2D" parent="."]
+position = Vector2(385, 186)
+texture = ExtResource("6_screen")
+
+[node name="KeyboardSprite" type="Sprite2D" parent="."]
+position = Vector2(335, 222)
+texture = ExtResource("7_kb")
+
+[node name="MugSprite" type="Sprite2D" parent="."]
+position = Vector2(308, 218)
+texture = ExtResource("8_mug")
+
+[node name="SmokeSprite" type="Sprite2D" parent="."]
+position = Vector2(385, 180)
+texture = ExtResource("9_smoke")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(240, 252)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_player")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="SFXTyping" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("11_typ")
+volume_db = -6.0
+
+[node name="SFXCup" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_cup")
+volume_db = 2.0
+
+[node name="SFXZap" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("13_zap")
+volume_db = 4.0
+
+[node name="SFXExplosion" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("14_boom")
+volume_db = 6.0
+
+[node name="SFXAlarm" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("15_alr")
+volume_db = 3.0
+
+[node name="SFXRun" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("16_run")
+volume_db = 0.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RedAlarmOverlay" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 0)
+
+[node name="DialoguePanel" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -75.0
+offset_right = 260.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/DialoguePanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 15
+text = "Relatório de pesquisa quase pronto lá no meu PC...
+Vou só dar uma olhada no servidor do lab e tomar um café."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AlertBanner" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -80.0
+offset_right = 270.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.02, 0.02, 0.9)
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/AlertBanner"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/AlertBanner/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "⚠ ALERTA: CURTO-CIRCUITO NO LABORATÓRIO ⚠"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="CanvasLayer/AlertBanner/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "O CURTO-CIRCUITO ESTÁ SE ESPALHANDO PELO LABORATÓRIO!
+EM 60 SEGUNDOS O LAB VAI SER TOTALMENTE DANIFICADO!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SkipLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = 35.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 0.7)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "[ESPAÇO / ENTER] Pular Introdução"
+horizontal_alignment = 2
+
+[node name="FadeRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

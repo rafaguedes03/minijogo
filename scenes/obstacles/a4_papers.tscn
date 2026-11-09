@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/obstacles/obstacle.gd" id="1_obs"]
+[ext_resource type="Texture2D" path="res://art/obstacles/a4_papers.png" id="2_tx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_papers"]
+size = Vector2(56, 14)
+
+[node name="A4Papers" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_obs")
+damage_type = "slip"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_papers")

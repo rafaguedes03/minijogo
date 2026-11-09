@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/obstacles/obstacle.gd" id="1_obs"]
+[ext_resource type="Texture2D" path="res://art/obstacles/water_cooler_1.png" id="2_wc1"]
+[ext_resource type="Texture2D" path="res://art/obstacles/water_cooler_2.png" id="3_wc2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wc1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wc2")
+}],
+"loop": true,
+"name": &"spill",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_puddle"]
+size = Vector2(64, 14)
+
+[node name="WaterCooler" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_obs")
+damage_type = "slip"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wc")
+animation = &"spill"
+autoplay = "spill"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 36)
+shape = SubResource("RectangleShape2D_puddle")
